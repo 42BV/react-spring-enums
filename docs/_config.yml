@@ -1,0 +1,8 @@
+remote_theme: pmarsceill/just-the-docs
+title: 'react-spring-enums'
+baseurl: /
+aux_links:
+  'View on GitHub':
+    - '//github.com/42bv/react-spring-enums'
+plugins:
+  - jekyll-remote-theme

@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`index barrel: index-barrel 1`] = `
+Object {
+  "EnumsContext": Object {
+    "$$typeof": Symbol(react.context),
+    "Consumer": Object {
+      "$$typeof": Symbol(react.context),
+      "_calculateChangedBits": null,
+      "_context": [Circular],
+    },
+    "Provider": Object {
+      "$$typeof": Symbol(react.provider),
+      "_context": [Circular],
+    },
+    "_calculateChangedBits": null,
+    "_currentRenderer": null,
+    "_currentRenderer2": null,
+    "_currentValue": Object {
+      "enums": Object {},
+    },
+    "_currentValue2": Object {
+      "enums": Object {},
+    },
+    "_threadCount": 0,
+  },
+  "EnumsProvider": [Function],
+  "configureEnums": [Function],
+  "getDefaultState": [Function],
+  "loadEnums": [Function],
+  "makeEnumsService": [Function],
+  "useEnum": [Function],
+  "useEnums": [Function],
+}
+`;

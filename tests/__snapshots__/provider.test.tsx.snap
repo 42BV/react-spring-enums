@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EnumProvider should provide context as consumer 1`] = `
+<h2>
+  My favorite car brand is 
+  TESLA
+</h2>
+`;
+
+exports[`EnumProvider should provide context as hook 1`] = `
+<h2>
+  I really like 
+  AUDI
+   cars
+</h2>
+`;
