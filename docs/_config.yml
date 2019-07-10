@@ -1,5 +1,6 @@
-remote_theme: pmarsceill/just-the-docs
+remote_theme: 42bv/fortytwo
 title: 'react-spring-enums'
+description: 'Sharing enums with a Java Spring Boot back-end'
 baseurl: /
 aux_links:
   'View on GitHub':

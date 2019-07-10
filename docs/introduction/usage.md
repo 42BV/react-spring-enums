@@ -2,13 +2,11 @@
 layout: default
 title: Usage
 description: 'Usage instructions for @42.nl/react-spring-enums.'
-parent: Introduction
+parent: Getting started
 permalink: /usage
 has_toc: true
 nav_order: 4
 ---
-
-# Usage
 
 This library provides access to enums through the React context API. This supports both functional and class component invocation.
 
