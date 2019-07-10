@@ -3,12 +3,10 @@ layout: default
 title: Configuration
 description: 'Configuration instructions for @42.nl/react-spring-enums.'
 has_toc: false
-parent: Introduction
+parent: Getting started
 permalink: /configuration
 nav_order: 3
 ---
-
-# Configuration
 
 ## Back-end endpoint
 
