@@ -1,6 +1,6 @@
 {
   "name": "@42.nl/react-spring-enums",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Sharing enums with a Java Spring Boot back-end.",
   "files": [
     "lib"
@@ -21,6 +21,9 @@
     "url": "https://github.com/42BV/react-spring-enums/issues"
   },
   "homepage": "https://github.com/42BV/react-spring-enums#readme",
+  "peerDependencies": {
+    "@42.nl/spring-connect": "^3.1.2"
+  },
   "devDependencies": {
     "@testing-library/react": "^8.0.4",
     "@types/fetch-mock": "7.2.3",
@@ -29,14 +32,15 @@
     "@types/react-test-renderer": "16.8.2",
     "@typescript-eslint/eslint-plugin": "1.4.2",
     "@typescript-eslint/parser": "1.4.2",
+    "@42.nl/spring-connect": "3.1.2",
     "eslint": "5.15.1",
     "eslint-config-react-app": "3.0.7",
     "eslint-plugin-react": "7.12.4",
     "fetch-mock": "7.3.1",
-    "husky": "^3.0.0",
-    "jest": "24.5.0",
-    "jest-dom": "3.5.0",
+    "husky": "2.4.1",
     "lint-staged": "^9.1.0",
+    "jest": "24.8.0",
+    "jest-dom": "3.5.0",
     "node-fetch": "2.3.0",
     "prettier": "1.16.4",
     "react": "16.8.6",
