@@ -41,7 +41,7 @@
     "lint-staged": "^9.1.0",
     "jest": "24.8.0",
     "jest-dom": "3.5.0",
-    "node-fetch": "2.3.0",
+    "node-fetch": "2.6.1",
     "prettier": "1.16.4",
     "react": "16.8.6",
     "react-dom": "16.8.6",
