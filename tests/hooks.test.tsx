@@ -1,6 +1,6 @@
 import React from 'react';
-import { render, cleanup, wait } from '@testing-library/react';
-import 'jest-dom/extend-expect';
+import { render, cleanup, waitFor } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 
 import { configureEnums, getService } from '../src/config';
 import { useEnum, useEnums } from '../src/hooks';
@@ -33,7 +33,7 @@ describe('useEnum', () => {
     component: Component,
     enums
   }: {
-    component: React.ComponentType<any>;
+    component: React.ComponentType<unknown>;
     enums: Enums;
   }) {
     configureEnums({
@@ -51,8 +51,10 @@ describe('useEnum', () => {
   }
 
   it('should fetch all enums', async () => {
+    expect.assertions(1);
+
     const { getByTestId } = setup({
-      component: () => {
+      component: function Component() {
         const { enums } = useEnums();
         return <p data-testid="header">{Object.keys(enums).join(' ')}</p>;
       },
@@ -62,35 +64,42 @@ describe('useEnum', () => {
       }
     });
 
-    await wait(() => {
+    await waitFor(() => {
       expect(getByTestId('header')).toHaveTextContent('CAR_BRANDS CAR_TYPES');
     });
   });
 
   it('should fetch a single enum', async () => {
+    expect.assertions(1);
+
     const { getByTestId } = setup({
-      component: () => {
+      component: function Component() {
         const carTypes = useEnum('CAR_BRANDS');
         return <p data-testid="header">{carTypes.join(' ')}</p>;
       },
       enums: { CAR_BRANDS: ['AUDI', 'TESLA'] }
     });
 
-    await wait(() => {
+    await waitFor(() => {
       expect(getByTestId('header')).toHaveTextContent('AUDI TESLA');
     });
   });
 
   it('should throw an error when fetching a non-existent enum', async () => {
+    expect.assertions(1);
+
+    // Prevent the error from logging
+    jest.spyOn(console, 'error').mockImplementation(() => undefined);
+
     const { getByTestId } = setup({
-      component: () => {
+      component: function Component() {
         const carBrands = useEnum('CAR_BRANDS');
         return <p data-testid="header">{carBrands.join(' ')}</p>;
       },
       enums: { CAR_TYPES: ['ELECTRIC', 'DIESEL'] }
     });
 
-    await wait(() => {
+    await waitFor(() => {
       expect(getByTestId('error')).toHaveTextContent(
         "@42.nl/spring-enum: The enum named 'CAR_BRANDS' could not be found, make sure the enums are loaded before the using them and that the 'CAR_BRANDS' enum actually exists."
       );

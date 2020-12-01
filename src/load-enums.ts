@@ -1,7 +1,8 @@
 import { getConfig, getService } from './config';
+import { Enums } from './models';
 
 // Throw error when not 200 otherwise parse response.
-function tryParse(response: Response): Promise<any> {
+function tryParse(response: Response): Promise<Enums> {
   if (response.status !== 200) {
     throw response;
   } else {
@@ -40,7 +41,9 @@ export async function loadEnums(): Promise<void> {
   const { enumsUrl, needsAuthentication } = getConfig();
   const service = getService();
 
-  const config: RequestInit = needsAuthentication ? { credentials: 'include' } : {};
+  const config: RequestInit = needsAuthentication
+    ? { credentials: 'include' }
+    : {};
   const response = await fetch(enumsUrl, config);
   const enums = await tryParse(response);
 

@@ -31,7 +31,9 @@ describe('getEnumsAsPage', () => {
       });
     }
 
-    test('1 / 4', async done => {
+    test('1 / 4', async (done) => {
+      expect.assertions(1);
+
       const page = await setup(1);
 
       expect(page).toEqual({
@@ -48,7 +50,9 @@ describe('getEnumsAsPage', () => {
       done();
     });
 
-    test('2 / 4', async done => {
+    test('2 / 4', async (done) => {
+      expect.assertions(1);
+
       const page = await setup(2);
 
       expect(page).toEqual({
@@ -65,7 +69,9 @@ describe('getEnumsAsPage', () => {
       done();
     });
 
-    test('3 / 4', async done => {
+    test('3 / 4', async (done) => {
+      expect.assertions(1);
+
       const page = await setup(3);
 
       expect(page).toEqual({
@@ -82,7 +88,9 @@ describe('getEnumsAsPage', () => {
       done();
     });
 
-    test('4 / 4', async done => {
+    test('4 / 4', async (done) => {
+      expect.assertions(1);
+
       const page = await setup(4);
 
       expect(page).toEqual({
@@ -111,7 +119,9 @@ describe('getEnumsAsPage', () => {
       });
     }
 
-    test('0 / 3', async done => {
+    test('0 / 3', async (done) => {
+      expect.assertions(1);
+
       const page = await setup(0);
 
       expect(page).toEqual({
@@ -128,7 +138,9 @@ describe('getEnumsAsPage', () => {
       done();
     });
 
-    test('1 / 3', async done => {
+    test('1 / 3', async (done) => {
+      expect.assertions(1);
+
       const page = await setup(1);
 
       expect(page).toEqual({
@@ -145,7 +157,9 @@ describe('getEnumsAsPage', () => {
       done();
     });
 
-    test('2 / 3', async done => {
+    test('2 / 3', async (done) => {
+      expect.assertions(1);
+
       const page = await setup(2);
 
       expect(page).toEqual({
@@ -162,7 +176,9 @@ describe('getEnumsAsPage', () => {
       done();
     });
 
-    test('3 / 3', async done => {
+    test('3 / 3', async (done) => {
+      expect.assertions(1);
+
       const page = await setup(3);
 
       expect(page).toEqual({
@@ -180,7 +196,9 @@ describe('getEnumsAsPage', () => {
     });
   });
 
-  it('should return a Page of size 10 by default', async done => {
+  it('should return a Page of size 10 by default', async (done) => {
+    expect.assertions(1);
+
     const content = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
     const page = await getEnumsAsPage({
       enumValues: content,
@@ -203,7 +221,9 @@ describe('getEnumsAsPage', () => {
     done();
   });
 
-  it('should filter when query is provided', async done => {
+  it('should filter when query is provided', async (done) => {
+    expect.assertions(1);
+
     const userRoles = ['aap', 'app', 'noot', 'mies', 'nutmeg'];
     const page = await getEnumsAsPage({
       enumValues: userRoles,

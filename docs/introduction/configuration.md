@@ -47,10 +47,10 @@ class EnumController {
  * EnumClassPathScanningCandidateComponentProvider is a specialization of {@link ClassPathScanningCandidateComponentProvider}
  * that only takes enum values into account.
  *
- * Furthermore it overrides the default behaviour of the {@link ClassPathScanningCandidateComponentProvider}
+ * Furthermore it overrides the default behavior of the {@link ClassPathScanningCandidateComponentProvider}
  * that checks that the classes that are found on the classpath are non-abstract. By their definition, an
  * enum that contains abstract methods or implements an interface is abstract and ignored.
- * This does not serve our purpose, hence the specialisation.
+ * This does not serve our purpose, hence the specialization.
  */
 @Component
 class EnumClassPathScanningCandidateComponentProvider extends ClassPathScanningCandidateComponentProvider {
@@ -68,7 +68,7 @@ class EnumClassPathScanningCandidateComponentProvider extends ClassPathScanningC
      * when it implements an interface or has an abstract method.
      *
      * The JavaDoc of the default implementation also states that
-     * this behaviour can be overridden in subclasses.
+     * this behavior can be overridden in subclasses.
      *
      * @param beanDefinition the bean definition to check
      * @return whether the bean definition qualifies as a candidate component

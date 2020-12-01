@@ -1,20 +1,20 @@
 import { Enums } from './models';
 
-export interface EnumsState {
+export type EnumsState = {
   enums: Enums;
-}
+};
 export type Subscriber = (state: EnumsState) => void;
 
-export interface EnumsService {
+export type EnumsService = {
   subscribe(subscriber: Subscriber): void;
   unsubscribe(subscriber: Subscriber): void;
   getState: () => EnumsState;
   setEnums(enums: Enums): void;
-}
+};
 
 export function getDefaultState(): EnumsState {
   return {
-    enums: {},
+    enums: {}
   };
 }
 
@@ -39,7 +39,7 @@ export function makeEnumsService(): EnumsService {
   }
 
   function informSubscribers() {
-    subscribers.forEach(subscriber => subscriber({ ...state }));
+    subscribers.forEach((subscriber) => subscriber({ ...state }));
   }
 
   function setEnums(enums: Enums): void {
@@ -49,13 +49,13 @@ export function makeEnumsService(): EnumsService {
   }
 
   function unsubscribe(subscriber: Subscriber): void {
-    subscribers = subscribers.filter(s => s !== subscriber);
+    subscribers = subscribers.filter((s) => s !== subscriber);
   }
 
   return {
     getState,
     subscribe,
     unsubscribe,
-    setEnums,
+    setEnums
   };
 }

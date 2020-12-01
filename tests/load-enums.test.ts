@@ -4,15 +4,19 @@ import { loadEnums } from '../src/load-enums';
 import { configureEnums, getService } from '../src/config';
 jest.mock('../src/service', () => ({
   makeEnumsService: () => ({
-    setEnums: jest.fn(),
-  }),
+    setEnums: jest.fn()
+  })
 }));
 
 describe('EnumsService', () => {
-  function setup({ needsAuthentication }: { needsAuthentication: boolean }): void {
+  function setup({
+    needsAuthentication
+  }: {
+    needsAuthentication: boolean;
+  }): void {
     configureEnums({
       enumsUrl: '/api/enums',
-      needsAuthentication,
+      needsAuthentication
     });
   }
 
@@ -22,12 +26,14 @@ describe('EnumsService', () => {
 
   describe('loadEnums', () => {
     test('200 with authentication', async () => {
+      expect.assertions(2);
+
       setup({ needsAuthentication: true });
       const service = getService();
 
       fetchMock.get('/api/enums', {
         body: { fake: 'enums' },
-        headers: { 'Access-Control-Allow-Credentials': 'include' },
+        headers: { 'Access-Control-Allow-Credentials': 'include' }
       });
 
       await loadEnums();
@@ -36,6 +42,8 @@ describe('EnumsService', () => {
     });
 
     test('200 without authentication', async () => {
+      expect.assertions(2);
+
       setup({ needsAuthentication: false });
       const service = getService();
 
@@ -47,6 +55,8 @@ describe('EnumsService', () => {
     });
 
     test('500', async () => {
+      expect.assertions(2);
+
       setup({ needsAuthentication: false });
       const service = getService();
 

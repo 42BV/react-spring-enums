@@ -1,14 +1,16 @@
 import { makeEnumsService } from '../src/service';
 
 describe('EnumsService', () => {
-  test('setting enums should inform subscribers', async done => {
+  test('setting enums should inform subscribers', async (done) => {
+    expect.assertions(1);
+
     const service = makeEnumsService();
     const CAR_TYPES = ['AUDI', 'TESLA'];
     service.setEnums({
-      CAR_TYPES,
+      CAR_TYPES
     });
 
-    service.subscribe(state => {
+    service.subscribe((state) => {
       expect(state.enums).toEqual({ CAR_TYPES });
       done();
     });
@@ -24,14 +26,14 @@ describe('EnumsService', () => {
     // It should immediately receive the state after subscribing.
     expect(subscriber).toBeCalledTimes(1);
     service.setEnums({
-      CAR_TYPES: ['AUDI', 'TESLA'],
+      CAR_TYPES: ['AUDI', 'TESLA']
     });
 
     expect(subscriber).toBeCalledTimes(2);
     // Unsubscribe the subscriber, and call logout.
     service.unsubscribe(subscriber);
     service.setEnums({
-      CAR_TYPES: ['AUDI', 'TESLA'],
+      CAR_TYPES: ['AUDI', 'TESLA']
     });
 
     // It should not have been informed anymore.

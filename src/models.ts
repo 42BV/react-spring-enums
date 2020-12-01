@@ -17,6 +17,6 @@ export type EnumValues = string[];
  * and 'BillingInterval'. The array points to the possible values
  * of the enum.
  */
-export interface Enums {
+export type Enums = {
   [enumName: string]: EnumValues;
-}
+};
