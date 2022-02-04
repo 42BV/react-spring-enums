@@ -3,9 +3,6 @@ import { EnumsService, makeEnumsService } from './service';
 export type Config = {
   // The URL which will provide the enums over a GET request.
   enumsUrl: string;
-
-  // Whether or not the 'enumsUrl' should be called with authentication.
-  needsAuthentication: boolean;
 };
 
 let config: Config | null = null;
@@ -14,7 +11,7 @@ let service: EnumsService | null = null;
 /**
  * Configures the Constraint library.
  *
- * @param {Config} The new configuration
+ * @param {Config} c The new configuration
  */
 export function configureEnums(c: Config): void {
   config = c;

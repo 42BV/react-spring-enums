@@ -1,7 +1,7 @@
 import { makeEnumsService } from '../src/service';
 
 describe('EnumsService', () => {
-  test('setting enums should inform subscribers', async (done) => {
+  test('setting enums should inform subscribers', async () => {
     expect.assertions(1);
 
     const service = makeEnumsService();
@@ -12,7 +12,6 @@ describe('EnumsService', () => {
 
     service.subscribe((state) => {
       expect(state.enums).toEqual({ CAR_TYPES });
-      done();
     });
   });
 
