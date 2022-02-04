@@ -6,7 +6,7 @@ import renderer from 'react-test-renderer';
 
 const HookTest = () => {
   const {
-    enums: { CAR_TYPES },
+    enums: { CAR_TYPES }
   } = useEnums();
   return <h2>I really like {CAR_TYPES[0]} cars</h2>;
 };
@@ -19,22 +19,21 @@ class ConsumerTest extends React.Component<{ favoriteCar: string }> {
 }
 
 describe('EnumProvider', () => {
-  function setup({ needsAuthentication }: { needsAuthentication: boolean }): void {
+  function setup(): void {
     configureEnums({
-      enumsUrl: '/api/enums',
-      needsAuthentication,
+      enumsUrl: '/api/enums'
     });
 
     getService().setEnums({ CAR_TYPES: ['AUDI', 'TESLA'] });
   }
 
   test('should provide context as hook', () => {
-    setup({ needsAuthentication: false });
+    setup();
     const tree = renderer
       .create(
         <EnumsProvider>
           <HookTest />
-        </EnumsProvider>,
+        </EnumsProvider>
       )
       .toJSON();
 
@@ -46,9 +45,11 @@ describe('EnumProvider', () => {
       .create(
         <EnumsProvider>
           <EnumsContext.Consumer>
-            {({ enums: { CAR_TYPES } }) => <ConsumerTest favoriteCar={CAR_TYPES[1]} />}
+            {({ enums: { CAR_TYPES } }) => (
+              <ConsumerTest favoriteCar={CAR_TYPES[1]} />
+            )}
           </EnumsContext.Consumer>
-        </EnumsProvider>,
+        </EnumsProvider>
       )
       .toJSON();
 

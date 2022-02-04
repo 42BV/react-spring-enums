@@ -31,7 +31,7 @@ describe('getEnumsAsPage', () => {
       });
     }
 
-    test('1 / 4', async (done) => {
+    test('1 / 4', async () => {
       expect.assertions(1);
 
       const page = await setup(1);
@@ -46,11 +46,9 @@ describe('getEnumsAsPage', () => {
         first: true,
         numberOfElements: 3
       });
-
-      done();
     });
 
-    test('2 / 4', async (done) => {
+    test('2 / 4', async () => {
       expect.assertions(1);
 
       const page = await setup(2);
@@ -65,11 +63,9 @@ describe('getEnumsAsPage', () => {
         first: false,
         numberOfElements: 3
       });
-
-      done();
     });
 
-    test('3 / 4', async (done) => {
+    test('3 / 4', async () => {
       expect.assertions(1);
 
       const page = await setup(3);
@@ -84,11 +80,9 @@ describe('getEnumsAsPage', () => {
         first: false,
         numberOfElements: 3
       });
-
-      done();
     });
 
-    test('4 / 4', async (done) => {
+    test('4 / 4', async () => {
       expect.assertions(1);
 
       const page = await setup(4);
@@ -103,8 +97,6 @@ describe('getEnumsAsPage', () => {
         first: false,
         numberOfElements: 1
       });
-
-      done();
     });
   });
 
@@ -119,7 +111,7 @@ describe('getEnumsAsPage', () => {
       });
     }
 
-    test('0 / 3', async (done) => {
+    test('0 / 3', async () => {
       expect.assertions(1);
 
       const page = await setup(0);
@@ -134,11 +126,9 @@ describe('getEnumsAsPage', () => {
         first: true,
         numberOfElements: 3
       });
-
-      done();
     });
 
-    test('1 / 3', async (done) => {
+    test('1 / 3', async () => {
       expect.assertions(1);
 
       const page = await setup(1);
@@ -153,11 +143,9 @@ describe('getEnumsAsPage', () => {
         first: false,
         numberOfElements: 3
       });
-
-      done();
     });
 
-    test('2 / 3', async (done) => {
+    test('2 / 3', async () => {
       expect.assertions(1);
 
       const page = await setup(2);
@@ -172,11 +160,9 @@ describe('getEnumsAsPage', () => {
         first: false,
         numberOfElements: 3
       });
-
-      done();
     });
 
-    test('3 / 3', async (done) => {
+    test('3 / 3', async () => {
       expect.assertions(1);
 
       const page = await setup(3);
@@ -191,12 +177,10 @@ describe('getEnumsAsPage', () => {
         first: false,
         numberOfElements: 1
       });
-
-      done();
     });
   });
 
-  it('should return a Page of size 10 by default', async (done) => {
+  it('should return a Page of size 10 by default', async () => {
     expect.assertions(1);
 
     const content = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
@@ -217,11 +201,9 @@ describe('getEnumsAsPage', () => {
       first: true,
       numberOfElements: 10
     });
-
-    done();
   });
 
-  it('should filter when query is provided', async (done) => {
+  it('should filter when query is provided', async () => {
     expect.assertions(1);
 
     const userRoles = ['aap', 'app', 'noot', 'mies', 'nutmeg'];
@@ -243,7 +225,5 @@ describe('getEnumsAsPage', () => {
       first: true,
       numberOfElements: 1
     });
-
-    done();
   });
 });

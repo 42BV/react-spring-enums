@@ -1,14 +1,5 @@
 import { getConfig, getService } from './config';
-import { Enums } from './models';
-
-// Throw error when not 200 otherwise parse response.
-function tryParse(response: Response): Promise<Enums> {
-  if (response.status !== 200) {
-    throw response;
-  } else {
-    return response.json();
-  }
-}
+import { get } from '@42.nl/spring-connect';
 
 /**
  * Loads the enums from the back-end.
@@ -38,14 +29,10 @@ function tryParse(response: Response): Promise<Enums> {
  * @returns {Promise}
  */
 export async function loadEnums(): Promise<void> {
-  const { enumsUrl, needsAuthentication } = getConfig();
+  const { enumsUrl } = getConfig();
   const service = getService();
 
-  const config: RequestInit = needsAuthentication
-    ? { credentials: 'include' }
-    : {};
-  const response = await fetch(enumsUrl, config);
-  const enums = await tryParse(response);
+  const enums = await get(enumsUrl);
 
   service.setEnums(enums);
 }

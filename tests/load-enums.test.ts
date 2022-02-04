@@ -1,7 +1,7 @@
-import fetchMock from 'fetch-mock';
-
 import { loadEnums } from '../src/load-enums';
 import { configureEnums, getService } from '../src/config';
+import * as SpringConnect from '@42.nl/spring-connect';
+
 jest.mock('../src/service', () => ({
   makeEnumsService: () => ({
     setEnums: jest.fn()
@@ -9,47 +9,22 @@ jest.mock('../src/service', () => ({
 }));
 
 describe('EnumsService', () => {
-  function setup({
-    needsAuthentication
-  }: {
-    needsAuthentication: boolean;
-  }): void {
+  function setup(): void {
     configureEnums({
-      enumsUrl: '/api/enums',
-      needsAuthentication
+      enumsUrl: '/api/enums'
     });
   }
 
-  afterEach(() => {
-    fetchMock.restore();
-  });
-
   describe('loadEnums', () => {
-    test('200 with authentication', async () => {
+    test('200', async () => {
       expect.assertions(2);
 
-      setup({ needsAuthentication: true });
+      setup();
       const service = getService();
 
-      fetchMock.get('/api/enums', {
-        body: { fake: 'enums' },
-        headers: { 'Access-Control-Allow-Credentials': 'include' }
-      });
+      jest.spyOn(SpringConnect, 'get').mockResolvedValue({ fake: 'enums' });
 
       await loadEnums();
-      expect(service.setEnums).toHaveBeenCalledTimes(1);
-      expect(service.setEnums).toHaveBeenCalledWith({ fake: 'enums' });
-    });
-
-    test('200 without authentication', async () => {
-      expect.assertions(2);
-
-      setup({ needsAuthentication: false });
-      const service = getService();
-
-      fetchMock.get('/api/enums', { fake: 'enums' }, {});
-      await loadEnums();
-
       expect(service.setEnums).toHaveBeenCalledTimes(1);
       expect(service.setEnums).toHaveBeenCalledWith({ fake: 'enums' });
     });
@@ -57,10 +32,10 @@ describe('EnumsService', () => {
     test('500', async () => {
       expect.assertions(2);
 
-      setup({ needsAuthentication: false });
+      setup();
       const service = getService();
 
-      fetchMock.get('/api/enums', 500);
+      jest.spyOn(SpringConnect, 'get').mockRejectedValue('');
 
       try {
         await loadEnums();
