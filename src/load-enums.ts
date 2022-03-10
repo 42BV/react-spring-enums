@@ -1,5 +1,6 @@
 import { getConfig, getService } from './config';
 import { get } from '@42.nl/spring-connect';
+import { Enums } from './models';
 
 /**
  * Loads the enums from the back-end.
@@ -32,7 +33,7 @@ export async function loadEnums(): Promise<void> {
   const { enumsUrl } = getConfig();
   const service = getService();
 
-  const enums = await get(enumsUrl);
+  const enums = await get<Enums>(enumsUrl);
 
   service.setEnums(enums);
 }
