@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/42BV/react-spring-enums#readme",
   "peerDependencies": {
-    "@42.nl/spring-connect": "^4.2|^5.0"
+    "@42.nl/spring-connect": "^4.2||^5.0"
   },
   "devDependencies": {
     "@42.nl/spring-connect": "5.0.2",
