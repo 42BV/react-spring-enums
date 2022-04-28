@@ -6,14 +6,12 @@ Object {
     "$$typeof": Symbol(react.context),
     "Consumer": Object {
       "$$typeof": Symbol(react.context),
-      "_calculateChangedBits": null,
       "_context": [Circular],
     },
     "Provider": Object {
       "$$typeof": Symbol(react.provider),
       "_context": [Circular],
     },
-    "_calculateChangedBits": null,
     "_currentRenderer": null,
     "_currentRenderer2": null,
     "_currentValue": Object {
@@ -22,6 +20,8 @@ Object {
     "_currentValue2": Object {
       "enums": Object {},
     },
+    "_defaultValue": null,
+    "_globalName": null,
     "_threadCount": 0,
   },
   "EnumsProvider": [Function],
