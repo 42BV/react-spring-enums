@@ -1,24 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`index barrel: index-barrel 1`] = `
-Object {
-  "EnumsContext": Object {
+{
+  "EnumsContext": {
     "$$typeof": Symbol(react.context),
-    "Consumer": Object {
+    "Consumer": {
       "$$typeof": Symbol(react.context),
       "_context": [Circular],
     },
-    "Provider": Object {
+    "Provider": {
       "$$typeof": Symbol(react.provider),
       "_context": [Circular],
     },
     "_currentRenderer": null,
     "_currentRenderer2": null,
-    "_currentValue": Object {
-      "enums": Object {},
+    "_currentValue": {
+      "enums": {},
     },
-    "_currentValue2": Object {
-      "enums": Object {},
+    "_currentValue2": {
+      "enums": {},
     },
     "_defaultValue": null,
     "_globalName": null,
