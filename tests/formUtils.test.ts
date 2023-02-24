@@ -1,23 +1,57 @@
-import { getEnumsAsPage, filterEnumValues } from '../src/formUtils';
+import { filterEnumValues, getEnumsAsPage } from '../src/formUtils';
 
-test('filterEnumValues', () => {
-  const enumValues = [
-    'aap',
-    'noot',
-    'MIES',
-    'appel',
-    'pear',
-    'nutmeg',
-    'peach'
-  ];
+describe('filterEnumValues', () => {
+  test('string enums', () => {
+    const enumValues = [
+      'aap',
+      'noot',
+      'MIES',
+      'appel',
+      'pear',
+      'nutmeg',
+      'peach'
+    ];
 
-  expect(filterEnumValues(enumValues, 'aap')).toEqual(['aap']);
-  expect(filterEnumValues(enumValues, 'm')).toEqual(['MIES']);
-  expect(filterEnumValues(enumValues, 'n')).toEqual(['noot', 'nutmeg']);
-  expect(filterEnumValues(enumValues, 'pea')).toEqual(['pear', 'peach']);
-  expect(filterEnumValues(enumValues, 'pear')).toEqual(['pear']);
-  expect(filterEnumValues(enumValues, '')).toBe(enumValues);
-  expect(filterEnumValues(enumValues, undefined)).toBe(enumValues);
+    expect(filterEnumValues(enumValues, 'aap')).toEqual(['aap']);
+    expect(filterEnumValues(enumValues, 'm')).toEqual(['MIES']);
+    expect(filterEnumValues(enumValues, 'n')).toEqual(['noot', 'nutmeg']);
+    expect(filterEnumValues(enumValues, 'pea')).toEqual(['pear', 'peach']);
+    expect(filterEnumValues(enumValues, 'pear')).toEqual(['pear']);
+    expect(filterEnumValues(enumValues, '')).toBe(enumValues);
+    expect(filterEnumValues(enumValues, undefined)).toBe(enumValues);
+  });
+
+  test('complex enums', () => {
+    const enumValues = [
+      { code: 'AAP', displayName: 'Aap' },
+      { code: 'NOOT', displayName: 'Noot' },
+      { code: 'MIES', displayName: 'Mies' },
+      { code: 'APPEL', displayName: 'Appel' },
+      { code: 'PEAR', displayName: 'Pear' },
+      { code: 'NUTMEG', displayName: 'Nutmeg' },
+      { code: 'PEACH', displayName: 'Peach' }
+    ];
+
+    expect(filterEnumValues(enumValues, 'aap')).toEqual([
+      { code: 'AAP', displayName: 'Aap' }
+    ]);
+    expect(filterEnumValues(enumValues, 'm')).toEqual([
+      { code: 'MIES', displayName: 'Mies' }
+    ]);
+    expect(filterEnumValues(enumValues, 'n')).toEqual([
+      { code: 'NOOT', displayName: 'Noot' },
+      { code: 'NUTMEG', displayName: 'Nutmeg' }
+    ]);
+    expect(filterEnumValues(enumValues, 'pea')).toEqual([
+      { code: 'PEAR', displayName: 'Pear' },
+      { code: 'PEACH', displayName: 'Peach' }
+    ]);
+    expect(filterEnumValues(enumValues, 'pear')).toEqual([
+      { code: 'PEAR', displayName: 'Pear' }
+    ]);
+    expect(filterEnumValues(enumValues, '')).toBe(enumValues);
+    expect(filterEnumValues(enumValues, undefined)).toBe(enumValues);
+  });
 });
 
 describe('getEnumsAsPage', () => {

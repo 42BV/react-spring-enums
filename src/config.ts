@@ -1,4 +1,5 @@
 import { EnumsService, makeEnumsService } from './service';
+import { Enums } from './models';
 
 export type Config = {
   // The URL which will provide the enums over a GET request.
@@ -19,7 +20,7 @@ export function configureEnums(c: Config): void {
 }
 
 /**
- * Either returns the a Config or throws an error when the
+ * Either returns a Config or throws an error when the
  * config is not yet initialized.
  *
  * @returns The Config
@@ -32,10 +33,10 @@ export function getConfig(): Config {
   }
 }
 
-export function getService(): EnumsService {
+export function getService<T = Enums>(): EnumsService<T> {
   if (service === null) {
     throw new Error('The enum service is not initialized.');
   } else {
-    return service;
+    return service as EnumsService<T>;
   }
 }

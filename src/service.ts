@@ -1,20 +1,20 @@
 import { Enums } from './models';
 
-export type EnumsState = {
-  enums: Enums;
+export type EnumsState<T = Enums> = {
+  enums: T;
 };
-export type Subscriber = (state: EnumsState) => void;
+export type Subscriber<T> = (state: EnumsState<T>) => void;
 
-export type EnumsService = {
-  subscribe(subscriber: Subscriber): void;
-  unsubscribe(subscriber: Subscriber): void;
-  getState: () => EnumsState;
-  setEnums(enums: Enums): void;
+export type EnumsService<T = Enums> = {
+  subscribe(subscriber: Subscriber<T>): void;
+  unsubscribe(subscriber: Subscriber<T>): void;
+  getState: () => EnumsState<T>;
+  setEnums(enums: T): void;
 };
 
-export function getDefaultState(): EnumsState {
+export function getDefaultState<T>(): EnumsState<T> {
   return {
-    enums: {}
+    enums: {} as T
   };
 }
 
@@ -24,15 +24,15 @@ export function getDefaultState(): EnumsState {
  * Exposes a subscription to anyone who wants to listen to the
  * changes to the EnumsState.
  */
-export function makeEnumsService(): EnumsService {
-  let state: EnumsState = getDefaultState();
-  let subscribers: Subscriber[] = [];
+export function makeEnumsService<T = Enums>(): EnumsService<T> {
+  let state = getDefaultState<T>();
+  let subscribers: Subscriber<T>[] = [];
 
   function getState() {
     return state;
   }
 
-  function subscribe(subscriber: Subscriber): void {
+  function subscribe(subscriber: Subscriber<T>): void {
     subscribers.push(subscriber);
 
     subscriber(state);
@@ -42,13 +42,13 @@ export function makeEnumsService(): EnumsService {
     subscribers.forEach((subscriber) => subscriber({ ...state }));
   }
 
-  function setEnums(enums: Enums): void {
+  function setEnums(enums: T): void {
     state = { enums };
 
     informSubscribers();
   }
 
-  function unsubscribe(subscriber: Subscriber): void {
+  function unsubscribe(subscriber: Subscriber<T>): void {
     subscribers = subscribers.filter((s) => s !== subscriber);
   }
 

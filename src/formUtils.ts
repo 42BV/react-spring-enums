@@ -1,25 +1,26 @@
-import { Page } from '@42.nl/spring-connect';
-import { EnumValues } from './models';
+import { Page, pageOf } from '@42.nl/spring-connect';
+import { EnumValue } from './models';
 
 /**
- * Given the EnumValues it will filter them based on the provided query.
- *
- * All EnumValues which do not start with the query will be removed.
+ * Returns the `EnumValue`s matching the provided query.
  *
  * @export
- * @param {EnumValues} enumValues
+ * @param {EnumValue[]} enumValues`
  * @param {string} [query]
  * @returns {string[]}
  */
 export function filterEnumValues(
-  enumValues: EnumValues,
+  enumValues: EnumValue[],
   query?: string
-): EnumValues {
-  if (query && query !== '') {
+): EnumValue[] {
+  if (query) {
     const queryLowerCased = query.toLowerCase();
 
-    enumValues = enumValues.filter(value => {
-      const valueLowerCase = value.toLowerCase();
+    return enumValues.filter((value) => {
+      const valueLowerCase =
+        typeof value === 'string'
+          ? value.toLowerCase()
+          : value.displayName.toLowerCase();
 
       return (
         valueLowerCase.substring(0, queryLowerCased.length) === queryLowerCased
@@ -31,8 +32,8 @@ export function filterEnumValues(
 }
 
 /**
- * Takes an `EnumValues` and a page and a query and turns it into
- * a `Page` from `"@42.nl/spring-connect` which is based on a Spring
+ * Takes an `EnumValue` array, page and query and turns it into
+ * a `Page` from `@42.nl/spring-connect` which is based on a Spring
  * boot Page:
  *
  * https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/domain/Page.html
@@ -50,7 +51,7 @@ export function filterEnumValues(
  *
  * @export
  * @param {{
- *   enumValues: EnumValues;
+ *   enumValues: EnumValue[];
  *   size?: number;
  *   page: number;
  *   query: string;
@@ -62,7 +63,7 @@ export function filterEnumValues(
  *   query,
  *   oneBased = true
  * }
- * @returns {Promise<Page<string>>}
+ * @returns {Promise<Page<EnumValue>>}
  */
 export function getEnumsAsPage({
   enumValues,
@@ -71,28 +72,13 @@ export function getEnumsAsPage({
   query,
   oneBased = true
 }: {
-  enumValues: EnumValues;
+  enumValues: EnumValue[];
   size?: number;
   page: number;
   query: string;
   oneBased?: boolean;
-}): Promise<Page<string>> {
-  const content = filterEnumValues(enumValues, query);
-
-  const actualPage = oneBased ? page - 1 : page;
-
-  const slice = content.slice(size * actualPage, size * actualPage + size);
-
-  const totalPages = Math.max(1, Math.ceil(content.length / size));
-
-  return Promise.resolve({
-    content: slice,
-    last: oneBased ? page === totalPages : page === totalPages - 1,
-    totalElements: content.length,
-    totalPages,
-    size: slice.length,
-    number: page,
-    first: oneBased ? page === 1 : page === 0,
-    numberOfElements: slice.length
-  });
+}): Promise<Page<EnumValue>> {
+  return new Promise((resolve) =>
+    resolve(pageOf(filterEnumValues(enumValues, query), page, size, oneBased))
+  );
 }
