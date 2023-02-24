@@ -1,22 +1,23 @@
 import React from 'react';
-import { EnumsProvider, EnumsContext } from '../src/provider';
+import { EnumsContext, EnumsProvider } from '../src/provider';
 import { configureEnums, getService } from '../src/config';
-import { useEnums } from '../src/hooks';
+import { useEnum } from '../src/hooks';
 import renderer from 'react-test-renderer';
+import { EnumValue } from '../src/models';
 
 const HookTest = () => {
-  const {
-    enums: { CAR_TYPES }
-  } = useEnums();
-  return <h2>I really like {CAR_TYPES[0]} cars</h2>;
+  const CAR_TYPES = useEnum<string>('CAR_TYPES');
+  return <p>I really like {CAR_TYPES[0]} cars</p>;
 };
 
-class ConsumerTest extends React.Component<{ favoriteCar: string }> {
-  render() {
-    const { favoriteCar } = this.props;
-    return <h2>My favorite car brand is {favoriteCar}</h2>;
-  }
-}
+const ConsumerTest = ({ favoriteCar }: { favoriteCar: EnumValue }) => {
+  return (
+    <h2>
+      My favorite car brand is{' '}
+      {typeof favoriteCar === 'string' ? favoriteCar : favoriteCar.displayName}
+    </h2>
+  );
+};
 
 describe('EnumProvider', () => {
   function setup(): void {
@@ -41,6 +42,7 @@ describe('EnumProvider', () => {
   });
 
   test('should provide context as consumer', () => {
+    setup();
     const tree = renderer
       .create(
         <EnumsProvider>

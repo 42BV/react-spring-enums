@@ -2,18 +2,19 @@ import { useEffect, useState } from 'react';
 
 import { getService } from './config';
 import { EnumsState } from './service';
+import { Enums, EnumValue } from './models';
 
 class MissingEnumException extends Error {}
 
 /**
  * Retrieves the entire enum state.
  */
-export function useEnums(): EnumsState {
-  const service = getService();
-  const [state, setState] = useState<EnumsState>(service.getState());
+export function useEnums<T = Enums>(): EnumsState<T> {
+  const service = getService<T>();
+  const [state, setState] = useState<EnumsState<T>>(service.getState());
 
   useEffect(() => {
-    const subscriber = (nextState: EnumsState) => {
+    const subscriber = (nextState: EnumsState<T>) => {
       setState(nextState);
     };
 
@@ -32,8 +33,8 @@ export function useEnums(): EnumsState {
  *
  * @param enumName
  */
-export function useEnum(enumName: string): string[] {
-  const { enums } = useEnums();
+export function useEnum<T = EnumValue>(enumName: string): T {
+  const { enums } = useEnums<{ [key: string]: T }>();
   const enumValues = enums[enumName];
 
   if (enumValues) {

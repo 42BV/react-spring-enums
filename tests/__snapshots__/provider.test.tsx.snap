@@ -2,15 +2,16 @@
 
 exports[`EnumProvider should provide context as consumer 1`] = `
 <h2>
-  My favorite car brand is 
+  My favorite car brand is
+   
   TESLA
 </h2>
 `;
 
 exports[`EnumProvider should provide context as hook 1`] = `
-<h2>
+<p>
   I really like 
   AUDI
    cars
-</h2>
+</p>
 `;
