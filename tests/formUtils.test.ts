@@ -13,8 +13,14 @@ describe('filterEnumValues', () => {
     ];
 
     expect(filterEnumValues(enumValues, 'aap')).toEqual(['aap']);
-    expect(filterEnumValues(enumValues, 'm')).toEqual(['MIES']);
+    expect(filterEnumValues(enumValues, 'm')).toEqual(['MIES', 'nutmeg']);
     expect(filterEnumValues(enumValues, 'n')).toEqual(['noot', 'nutmeg']);
+    expect(filterEnumValues(enumValues, 'a')).toEqual([
+      'aap',
+      'appel',
+      'pear',
+      'peach'
+    ]);
     expect(filterEnumValues(enumValues, 'pea')).toEqual(['pear', 'peach']);
     expect(filterEnumValues(enumValues, 'pear')).toEqual(['pear']);
     expect(filterEnumValues(enumValues, '')).toBe(enumValues);
@@ -36,11 +42,18 @@ describe('filterEnumValues', () => {
       { code: 'AAP', displayName: 'Aap' }
     ]);
     expect(filterEnumValues(enumValues, 'm')).toEqual([
-      { code: 'MIES', displayName: 'Mies' }
+      { code: 'MIES', displayName: 'Mies' },
+      { code: 'NUTMEG', displayName: 'Nutmeg' }
     ]);
     expect(filterEnumValues(enumValues, 'n')).toEqual([
       { code: 'NOOT', displayName: 'Noot' },
       { code: 'NUTMEG', displayName: 'Nutmeg' }
+    ]);
+    expect(filterEnumValues(enumValues, 'a')).toEqual([
+      { code: 'AAP', displayName: 'Aap' },
+      { code: 'APPEL', displayName: 'Appel' },
+      { code: 'PEAR', displayName: 'Pear' },
+      { code: 'PEACH', displayName: 'Peach' }
     ]);
     expect(filterEnumValues(enumValues, 'pea')).toEqual([
       { code: 'PEAR', displayName: 'Pear' },
@@ -51,6 +64,12 @@ describe('filterEnumValues', () => {
     ]);
     expect(filterEnumValues(enumValues, '')).toBe(enumValues);
     expect(filterEnumValues(enumValues, undefined)).toBe(enumValues);
+  });
+
+  it('should thrown an error when enumValues is not an array of string or ComplexEnumType', () => {
+    expect(() => filterEnumValues([null], 'test')).toThrowError(
+      'You have to provide a custom getDisplayValue for getEnumsAsPage and filterEnumValues when the enum type is not a string and does not extend ComplexEnumType'
+    );
   });
 });
 
