@@ -33,8 +33,8 @@ export function useEnums<T = Enums>(): EnumsState<T> {
  *
  * @param enumName
  */
-export function useEnum<T = EnumValue>(enumName: string): T {
-  const { enums } = useEnums<{ [key: string]: T }>();
+export function useEnum<T = EnumValue>(enumName: string): T[] {
+  const { enums } = useEnums<{ [key: string]: T[] }>();
   const enumValues = enums[enumName];
 
   if (enumValues) {
