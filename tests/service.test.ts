@@ -19,7 +19,7 @@ describe('EnumsService', () => {
     const service = makeEnumsService();
 
     // Subscribe a subscriber.
-    const subscriber = jest.fn();
+    const subscriber = vi.fn();
     service.subscribe(subscriber);
 
     // It should immediately receive the state after subscribing.

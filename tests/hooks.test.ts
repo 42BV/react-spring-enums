@@ -1,5 +1,4 @@
 import { cleanup } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
 
 import { configureEnums, getService } from '../src/config';
 import { useEnum, useEnums } from '../src/hooks';
@@ -50,12 +49,10 @@ describe('useEnum', () => {
     setup();
 
     // Prevent the error from logging
-    jest.spyOn(console, 'error').mockImplementation(() => undefined);
+    vi.spyOn(console, 'error').mockImplementation(() => undefined);
 
     expect(() => renderHook(() => useEnum('NON_EXISTING'))).toThrow(
-      Error(
-        "@42.nl/spring-enum: The enum named 'NON_EXISTING' could not be found, make sure the enums are loaded before the using them and that the 'NON_EXISTING' enum actually exists."
-      )
+      "@42.nl/spring-enum: The enum named 'NON_EXISTING' could not be found, make sure the enums are loaded before the using them and that the 'NON_EXISTING' enum actually exists."
     );
   });
 });

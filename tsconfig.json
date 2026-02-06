@@ -12,7 +12,8 @@
     "strict": true,
     "target": "es6",
     "jsx": "react",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
   "files": ["src/index.ts"],
   "exclude": ["node_modules"]

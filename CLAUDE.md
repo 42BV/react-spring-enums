@@ -8,10 +8,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-- **Run all checks:** `npm test` (runs lint + TypeScript check + Jest with coverage)
+- **Run all checks:** `npm test` (runs lint + TypeScript check + Vitest with coverage)
 - **Run tests only:** `npm run test:coverage`
 - **Run tests in watch mode:** `npm start`
-- **Run a single test file:** `npx jest tests/hooks.test.ts`
+- **Run a single test file:** `npx vitest run tests/hooks.test.ts`
 - **Type check:** `npm run test:ts`
 - **Lint:** `npm run lint`
 - **Build (compile to lib/):** `npm run tsc`
@@ -32,8 +32,7 @@ The library uses a custom pub/sub service pattern (no Redux/external state) with
 ## Key Conventions
 
 - **Peer dependency:** `@42.nl/spring-connect` (>=6.1 <8.0) - provides `get()` for HTTP and `pageOf()` for pagination.
-- **100% test coverage required** (branches, functions, lines, statements) - enforced by Jest config.
-- **ESLint rule:** `jest/prefer-expect-assertions` is enforced for async test functions (must include `expect.assertions(n)`).
+- **100% test coverage required** (branches, functions, lines, statements) - enforced by Vitest config.
 - **Formatting:** Prettier with single quotes, no trailing commas.
 - **Pre-commit hook:** Husky runs `lint-staged` (Prettier) on staged files in `src/` and `tests/`.
 - **TypeScript strict mode** is enabled. Output targets ES6/CommonJS to `lib/`.

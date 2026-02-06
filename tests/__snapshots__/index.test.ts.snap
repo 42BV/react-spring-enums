@@ -1,7 +1,10 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`index barrel: index-barrel 1`] = `
+exports[`index barrel > index-barrel 1`] = `
 {
+  "Config": undefined,
+  "EnumValues": undefined,
+  "Enums": undefined,
   "EnumsContext": {
     "$$typeof": Symbol(react.context),
     "Consumer": {
@@ -25,6 +28,7 @@ exports[`index barrel: index-barrel 1`] = `
     "_threadCount": 0,
   },
   "EnumsProvider": [Function],
+  "EnumsState": undefined,
   "configureEnums": [Function],
   "filterEnumValues": [Function],
   "getDefaultState": [Function],
