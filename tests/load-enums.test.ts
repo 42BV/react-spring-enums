@@ -1,6 +1,10 @@
 import { loadEnums } from '../src/load-enums';
 import { configureEnums, getService } from '../src/config';
-import * as SpringConnect from '@42.nl/spring-connect';
+import { get } from '@42.nl/spring-connect';
+
+vi.mock('@42.nl/spring-connect', () => ({
+  get: vi.fn()
+}));
 
 vi.mock('../src/service', () => ({
   makeEnumsService: () => ({
@@ -22,7 +26,7 @@ describe('EnumsService', () => {
       setup();
       const service = getService();
 
-      vi.spyOn(SpringConnect, 'get').mockResolvedValue({ fake: 'enums' });
+      vi.mocked(get).mockResolvedValue({ fake: 'enums' });
 
       await loadEnums();
       expect(service.setEnums).toHaveBeenCalledTimes(1);
@@ -35,7 +39,7 @@ describe('EnumsService', () => {
       setup();
       const service = getService();
 
-      vi.spyOn(SpringConnect, 'get').mockRejectedValue('');
+      vi.mocked(get).mockRejectedValue('');
 
       try {
         await loadEnums();

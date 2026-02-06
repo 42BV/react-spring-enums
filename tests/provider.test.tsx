@@ -1,8 +1,8 @@
 import React from 'react';
+import { render } from '@testing-library/react';
 import { EnumsContext, EnumsProvider } from '../src/provider';
 import { configureEnums, getService } from '../src/config';
 import { useEnum } from '../src/hooks';
-import renderer from 'react-test-renderer';
 import { EnumValue } from '../src/models';
 
 const HookTest = () => {
@@ -30,31 +30,27 @@ describe('EnumProvider', () => {
 
   test('should provide context as hook', () => {
     setup();
-    const tree = renderer
-      .create(
-        <EnumsProvider>
-          <HookTest />
-        </EnumsProvider>
-      )
-      .toJSON();
+    const { container } = render(
+      <EnumsProvider>
+        <HookTest />
+      </EnumsProvider>
+    );
 
-    expect(tree).toMatchSnapshot();
+    expect(container.innerHTML).toContain('I really like AUDI cars');
   });
 
   test('should provide context as consumer', () => {
     setup();
-    const tree = renderer
-      .create(
-        <EnumsProvider>
-          <EnumsContext.Consumer>
-            {({ enums: { CAR_TYPES } }) => (
-              <ConsumerTest favoriteCar={CAR_TYPES[1]} />
-            )}
-          </EnumsContext.Consumer>
-        </EnumsProvider>
-      )
-      .toJSON();
+    const { container } = render(
+      <EnumsProvider>
+        <EnumsContext.Consumer>
+          {({ enums: { CAR_TYPES } }) => (
+            <ConsumerTest favoriteCar={CAR_TYPES[1]} />
+          )}
+        </EnumsContext.Consumer>
+      </EnumsProvider>
+    );
 
-    expect(tree).toMatchSnapshot();
+    expect(container.innerHTML).toContain('My favorite car brand is TESLA');
   });
 });
