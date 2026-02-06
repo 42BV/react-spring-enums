@@ -40,7 +40,7 @@ describe('EnumsService', () => {
       try {
         await loadEnums();
         fail();
-      } catch (response) {
+      } catch {
         expect(service.setEnums).toHaveBeenCalledTimes(0);
         expect(service.setEnums).not.toBeCalledWith({ enums: undefined });
       }

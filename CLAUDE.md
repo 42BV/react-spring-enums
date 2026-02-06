@@ -33,6 +33,7 @@ The library uses a custom pub/sub service pattern (no Redux/external state) with
 
 - **Peer dependency:** `@42.nl/spring-connect` (>=6.1 <8.0) - provides `get()` for HTTP and `pageOf()` for pagination.
 - **100% test coverage required** (branches, functions, lines, statements) - enforced by Vitest config.
+- **ESLint 9 flat config** in `eslint.config.mjs` — uses `typescript-eslint`, `eslint-plugin-react`, and `eslint-plugin-react-hooks`.
 - **Formatting:** Prettier with single quotes, no trailing commas.
 - **Pre-commit hook:** Husky runs `lint-staged` (Prettier) on staged files in `src/` and `tests/`.
 - **TypeScript strict mode** is enabled. Output targets ES6/CommonJS to `lib/`.

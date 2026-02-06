@@ -99,7 +99,7 @@ function enumValueDisplayName<T = EnumValue>(enumValue: T): string {
   if (
     enumValue &&
     typeof enumValue === 'object' &&
-    enumValue.hasOwnProperty('displayName')
+    Object.prototype.hasOwnProperty.call(enumValue, 'displayName')
   ) {
     // @ts-expect-error We checked if property displayName exists but typescript somehow still doesn't understand
     return enumValue.displayName;
