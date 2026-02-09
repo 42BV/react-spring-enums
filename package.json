@@ -1,6 +1,6 @@
 {
   "name": "@42.nl/react-spring-enums",
-  "version": "1.4.0-rc.0",
+  "version": "1.4.0",
   "description": "Sharing enums with a Java Spring Boot back-end.",
   "files": [
     "lib"
